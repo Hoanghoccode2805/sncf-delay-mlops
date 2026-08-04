@@ -1,0 +1,22 @@
+services:
+  # Service 1: Core API & MLOps Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sncf_mlops_app
+    ports:
+      - "8000:8000"
+    env_file:
+      - config/.env
+    volumes:
+      - .:/app  # Live-reload code from local into container during development
+    command: uvicorn entrypoint.api:app --host 0.0.0.0 --port 8000 --reload
+
+  # Service 2: MLflow Tracking Server (Save train model history)
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.10.0
+    container_name: sncf_mlflow_server
+    ports:
+      - "5000:5000"
+    command: mlflow server --host 0.0.0.0 --port 5000

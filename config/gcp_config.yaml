@@ -1,0 +1,22 @@
+gcp:
+  project_id: "sncf-delay-mlops-prod"
+  region: "europe-west9" # Paris Region
+  storage:
+    bucket_name: "sncf-mlops-bucket-prod"
+    raw_data_path: "raw/"
+    processed_data_path: "processed/"
+    model_artifacts_path: "models/"
+
+data_ingestion:
+  sncf_base_url: "https://api.navitia.io/v1/coverage/fr-nw/"
+  weather_base_url: "https://api.meteofrance.fr/public/DPVigilance/v1/"
+  fetch_interval_hours: 24
+
+model_params:
+  target_column: "delay_minutes"
+  test_size: 0.2
+  random_state: 42
+  xgboost:
+    n_estimators: 100
+    learning_rate: 0.05
+    max_depth: 6
