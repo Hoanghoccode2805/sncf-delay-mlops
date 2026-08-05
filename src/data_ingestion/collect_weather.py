@@ -13,11 +13,11 @@ openmeteo = openmeteo_requests.Client(session=retry_session)
 stations = {
     'PARIS_LYON': (48.8443, 2.3730),
     'PARIS_EST': (48.8777, 2.3579),
-    'CHAMBERY': (45.5906, 5.8987),
-    'BELLEGARDE': (46.1047, 5.8252),
-    'DIJON': (47.3200, 5.0667),
+    'CHAMBERY CHALLES LES EAUX': (45.5906, 5.8987),
+    'BELLEGARDE (AIN)': (46.1047, 5.8252),
+    'DIJON_VILLE': (47.3200, 5.0667),
     'STRASBOURG': (48.5731, 7.6392),
-    'MULHOUSE': (47.7451, 7.3394),
+    'MULHOUSE VILLE': (47.7451, 7.3394),
 }
 
 def collect_weather_openmeteo():
