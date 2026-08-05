@@ -26,8 +26,8 @@ TARGET_ROUTES = [
 COLUMN_MAPPING = {
     'Date': 'date',
     'Service': 'service',
-    'Gare de départ': 'departure_station',
-    'Gare d\'arrivée': 'arrival_station',
+    'Gare depart': 'departure_station',
+    'Gare arrivee': 'arrival_station',
     'Durée moyenne du trajet': 'avg_journey_duration',
     'Nombre de circulations prévues': 'nb_planned_trains',
     'Nombre de trains annulés': 'nb_cancelled_trains',
@@ -49,7 +49,7 @@ COLUMN_MAPPING = {
     'Prct retard pour cause gestion trafic': 'pct_delay_traffic_management',
     'Prct retard pour cause matériel roulant': 'pct_delay_rolling_stock',
     'Prct retard pour cause gestion en gare et réutilisation de matériel': 'pct_delay_station_management',
-    'Prct retard pour cause prise en compte voyageurs (affluence; gestions PSH; correspondances)': 'pct_delay_passenger_factors'
+    'Prct retard pour cause prise en compte voyageurs ,,,,,,,,,,,,': 'pct_delay_passenger_factors'
 }
 
 COLUMNS_TO_DROP = [
@@ -74,21 +74,21 @@ def process_data():
         RAW_DATA_PATH, 
         sep=';', 
         decimal=',',
-        encoding='latin1', 
+        encoding='utf-8-sig', 
         engine='python', 
         on_bad_lines='skip'
     )
     
     # 2. Strip whitespaces from departure and arrival stations to ensure exact matching
-    df['Gare de départ'] = df['Gare de départ'].astype(str).str.strip()
-    df['Gare d\'arrivée'] = df['Gare d\'arrivée'].astype(str).str.strip()
+    df['Gare depart'] = df['Gare depart'].astype(str).str.strip()
+    df['Gare arrivee'] = df['Gare arrivee'].astype(str).str.strip()
     
     # 3. Filter data for the exact 5 routes required
     # Create a boolean mask initialized to False
     mask = pd.Series([False] * len(df))
     
     for dep_station, arr_station in TARGET_ROUTES:
-        route_mask = (df['Gare de départ'] == dep_station) & (df['Gare d\'arrivée'] == arr_station)
+        route_mask = (df['Gare depart'] == dep_station) & (df['Gare arrivee'] == arr_station)
         mask = mask | route_mask
         
     df_filtered = df[mask].copy()
