@@ -2,6 +2,7 @@ data/
 *.csv
 *.parquet
 *.json
+gcp_config.yaml
 
 .env
 .venv/
@@ -19,5 +20,5 @@ __pycache__/
 *.log
 mlruns/
 wandb/
-models/
+mlflow.db
 artifacts/
