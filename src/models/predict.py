@@ -5,7 +5,7 @@ import mlflow.sklearn
 
 os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
 
-class SCNFDelayPredictor:
+class SNCFDelayPredictor:
     def __init__(self, run_id: str, model_name : str = "model_Random_Forest" ):
         mlflow.set_tracking_uri("sqlite:///mlflow.db")
 
@@ -45,7 +45,7 @@ class SCNFDelayPredictor:
 if __name__ == "__main__": 
     TEST_RUN_ID = "e2ebbfbff1cc46d382156d40ba9e1493"
     try:
-        predictor = SCNFDelayPredictor(run_id=TEST_RUN_ID)
+        predictor = SNCFDelayPredictor(run_id=TEST_RUN_ID)
         sample_input = {
             "departure_station": "BELLEGARDE (AIN)",
             "arrival_station": "PARIS LYON",
