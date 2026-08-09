@@ -2,6 +2,9 @@ import os
 import pandas as pd
 import mlflow
 import mlflow.sklearn
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
 
@@ -12,9 +15,9 @@ class SNCFDelayPredictor:
         # Standard MLflow path: runs:/<run_id>/<model_folder_name>
         self.model_uri = f"runs:/{run_id}/{model_name}"
 
-        print(f"Load model from {self.model_uri}")
+        logger.info(f"Load model from {self.model_uri}")
         self.model = mlflow.sklearn.load_model(self.model_uri)
-        print("Model loaded successfully")
+        logger.info("Model loaded successfully")
 
         # Get the list of features (columns) required by the model from MLflow metadata
         self.expected_columns = list(self.model.feature_names_in_)
@@ -71,7 +74,7 @@ if __name__ == "__main__":
         }
 
         result = predictor.predict(sample_input)
-        print(f"Delay forecast for the train: {result} minutes")
+        logger.info(f"Delay forecast for the train: {result} minutes")
 
     except Exception as e:
-        print(f"Error: {e}")
+        logger.error(f"Error: {e}")

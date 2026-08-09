@@ -1,6 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from entrypoint.schemas import SNCFDelayInput
 from src.models.predict import SNCFDelayPredictor
+from src.utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 # --- API Documentation & Meta Data ---
 API_DESCRIPTION = """
@@ -32,7 +35,7 @@ RUN_ID = "e2ebbfbff1cc46d382156d40ba9e1493"
 try:
     predictor = SNCFDelayPredictor(run_id=RUN_ID)
 except Exception as e:
-    print(f"Failed to load model: {e}")
+    logger.error(f"Failed to load model: {e}")
     predictor = None
 
 # --- Endpoints ---
