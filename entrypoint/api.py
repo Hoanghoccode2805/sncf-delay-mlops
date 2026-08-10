@@ -60,7 +60,7 @@ def predict_delay(data: SNCFDelayInput):
         )
     
     try:
-        input_dict = data.dict()
+        input_dict = data.model_dump()
         predicted_delay = predictor.predict(input_dict)
         
         return {

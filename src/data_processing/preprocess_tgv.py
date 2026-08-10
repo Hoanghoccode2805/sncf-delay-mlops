@@ -3,14 +3,11 @@ import unicodedata
 import os
 from config.config import RAW_DATA_TGV, CLEAN_DATA_TGV
 
-# -----------------------------------------------------------------------------
 # Configuration Paths
-# -----------------------------------------------------------------------------
 RAW_DATA_PATH = RAW_DATA_TGV
 CLEAN_DATA_PATH = CLEAN_DATA_TGV
-# -----------------------------------------------------------------------------
+
 # Target Routes Configuration
-# -----------------------------------------------------------------------------
 # List of tuples defining the specific (departure_station, arrival_station) routes to keep
 TARGET_ROUTES = [
     ("CHAMBERY CHALLES LES EAUX", "PARIS LYON"),
@@ -20,9 +17,8 @@ TARGET_ROUTES = [
     ("DIJON VILLE", "PARIS LYON")
 ]
 
-# -----------------------------------------------------------------------------
+
 # Column Mapping: French to English (snake_case)
-# -----------------------------------------------------------------------------
 COLUMN_MAPPING = {
     'Date': 'date',
     'Service': 'service',
