@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import mlflow
 import mlflow.sklearn
+import glob
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -10,10 +11,16 @@ os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
 
 class SNCFDelayPredictor:
     def __init__(self, run_id: str, model_name : str = "model_Random_Forest" ):
-        mlflow.set_tracking_uri("sqlite:///mlflow.db")
+        logger.info("Khởi tạo API với mô hình Production tĩnh.")
+        
+        model_dir = "production_model"
+        self.model_uri = os.path.abspath(model_dir)
+        
+        if not os.path.exists(self.model_uri):
+            logger.error(f"Model directory not found at: {self.model_uri}")
+            raise FileNotFoundError(f"Missing model directory: {model_dir}")
 
-        # Standard MLflow path: runs:/<run_id>/<model_folder_name>
-        self.model_uri = f"runs:/{run_id}/{model_name}"
+        logger.info(f"Load model directly from: {self.model_uri}")
 
         logger.info(f"Load model from {self.model_uri}")
         self.model = mlflow.sklearn.load_model(self.model_uri)

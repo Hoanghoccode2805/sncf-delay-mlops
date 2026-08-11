@@ -1,27 +1,23 @@
-# 1. Use Base Image Python 3.10 slim (Lightweight, optimized for storage space)
-FROM python:3.10-slim
+# 1. Use a lightweight Linux base image with Python 3.11 installed
+FROM python:3.11-slim
 
-# 2. Set the default working directory in the Container.
+# 2. Set the default working directory inside the container
 WORKDIR /app
 
-# 3. Install the necessary system libraries for C++ (XGBoost) and Git.
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    curl \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
-# 4. Copy the requirements file first to take advantage of Docker Cache.
+# 3. Copy the dependencies file first to leverage Docker cache, then install them
 COPY requirements.txt .
-
-# 5. Install Python libraries (do not cache to minimize image size).
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 6. Copy the entire project source code into the Container.
-COPY . .
+# 4. Copy all source code, configurations, and MLflow models into the container
+# COPY [Source_on_your_computer] [Destination_inside_the_container]
+COPY src/ src/              
+COPY entrypoint/ entrypoint/
+COPY config/ config/
+COPY mlruns/ mlruns/
+COPY mlflow.db .
 
-# 7. Open port 8000 for FastAPI
+# 5. Expose port 8000 to allow external traffic to the API
 EXPOSE 8000
 
-# 8. The default command when the container starts (running FastAPI Server)
+# 6. Command to start the FastAPI server when the container runs
 CMD ["uvicorn", "entrypoint.api:app", "--host", "0.0.0.0", "--port", "8000"]

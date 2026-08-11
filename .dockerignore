@@ -1,8 +1,20 @@
-.git
-.venv
-__pycache__
+# Ignore Python junk files
+__pycache__/
 *.pyc
 *.pyo
-.env
+
+# Skip the virtual environment
+.venv/
+venv/
+env/
+
+# Ignore Git history and logs
+.git/
+logs/
+.pytest_cache/
+
+# Skip test source code
+tests/
+
+# Ignore raw data
 data/
-.pytest_cache
