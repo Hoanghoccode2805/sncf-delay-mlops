@@ -10,8 +10,8 @@ logger = get_logger(__name__)
 os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
 
 class SNCFDelayPredictor:
-    def __init__(self, run_id: str, model_name : str = "model_Random_Forest" ):
-        logger.info("Khởi tạo API với mô hình Production tĩnh.")
+    def __init__(self):
+        logger.info("Initialize the API with a static production model.")
         
         model_dir = "production_model"
         self.model_uri = os.path.abspath(model_dir)

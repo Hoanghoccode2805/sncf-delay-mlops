@@ -13,8 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ src/              
 COPY entrypoint/ entrypoint/
 COPY config/ config/
-COPY mlruns/ mlruns/
-COPY mlflow.db .
+COPY production_model/ production_model/
 
 # 5. Expose port 8000 to allow external traffic to the API
 EXPOSE 8000

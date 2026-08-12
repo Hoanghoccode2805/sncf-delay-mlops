@@ -33,7 +33,7 @@ app = FastAPI(
 # --- Initialize Model ---
 RUN_ID = "e2ebbfbff1cc46d382156d40ba9e1493"
 try:
-    predictor = SNCFDelayPredictor(run_id=RUN_ID)
+    predictor = SNCFDelayPredictor()
 except Exception as e:
     logger.error(f"Failed to load model: {e}")
     predictor = None
