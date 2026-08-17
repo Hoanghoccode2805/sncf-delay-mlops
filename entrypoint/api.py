@@ -40,12 +40,16 @@ except Exception as e:
 
 # --- Endpoints ---
 
-@app.get("/", tags=["Health Check"])
+@app.get("/health")
 def health_check():
     """
-    Root endpoint to verify if the API is up and running.
+    This endpoint allows Render (or any cloud service) to check if the API is up and running normally.
     """
-    return {"status": "success", "message": "SNCF MLOps API is running perfectly!"}
+    return {
+        "status": "ok", 
+        "project": "SNCF Delay Prediction", 
+        "message": "API is healthy and ready to serve!"
+    }
 
 
 @app.post("/predict", tags=["Prediction"])
