@@ -2,7 +2,7 @@ name: SNCF API CI Pipeline
 
 on:
     push:
-        branches: ["test-ci"]
+        branches: ["main"]
     pull_request:
         branches: ["main"]
 
